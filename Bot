@@ -1,6 +1,8 @@
 import telebot
 
-TOKEN = ""
+f = open('token.txt', 'r')
+TOKEN = f.readline()
+f.close()
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -10,7 +12,6 @@ def say_lmao(message: telebot.types.Message):
 
 @bot.message_handler(commands=['start', 'help'])
 def handle_docs_audio(message):
-    print(message)
     bot.send_message(message.chat.id,f'Hello {message.chat.username}! How are you?')
 
 bot.polling(none_stop=True)
