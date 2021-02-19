@@ -1,0 +1,16 @@
+import telebot
+
+TOKEN = "1620527732:AAE2dMHzLn5AsJ0AF5zHcJE9e_TF-P083so"
+
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(content_types=['photo', ])
+def say_lmao(message: telebot.types.Message):
+    bot.reply_to(message, 'Nice meme XDD')
+
+@bot.message_handler(commands=['start', 'help'])
+def handle_docs_audio(message):
+    print(message)
+    bot.send_message(message.chat.id,f'Hello {message.chat.username}! How are you?')
+
+bot.polling(none_stop=True)
