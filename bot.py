@@ -23,9 +23,9 @@ def handle_docs_audio(message):
 @bot.message_handler(content_types=['text', ])
 def responder(message: telebot.types.Message):
     try:
-        base, quote, amount = message.text.split(' ')
         if len(message.text.split(' ')) != 3:
             raise ConvertionException('Число параметров отлично от трех!')
+        base, quote, amount = message.text.split(' ')
         text = f'Цена {amount} {base} в {quote} - {CurrencyConvertor.get_price(base, quote, amount)}'
     except ConvertionException as e:
         bot.reply_to(message, f'Ошибка во введенных данных.\n{e}')
