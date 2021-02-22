@@ -8,6 +8,10 @@ f.close()
 
 bot = telebot.TeleBot(TOKEN)
 
+currency = { 'доллар': 'USD',
+             'евро': 'EUR',
+             'рубль': 'RUR', }
+
 @bot.message_handler(content_types=['photo', ])
 def say_lmao(message: telebot.types.Message):
     bot.reply_to(message, 'Nice meme XDD')
@@ -16,6 +20,14 @@ def say_lmao(message: telebot.types.Message):
 def show_values(message):
     values = requests.get(f'https://currate.ru/api/?get=currency_list&key={APIKEY}')
     bot.reply_to(message, values)
+
+@@bot.message_handler(content_types=['text', ])
+def responder(message):
+    curf, curt, amount = message.text.split(' ')
+    r = requests.get(f'https://currate.ru/api/?get={currency[curf]}{currency[curt]}&key={APIKEY}')
+    total_base = json.loads(r.content)
+    bot.send_message(message.chat.id, total_base)
+
 
 @bot.message_handler(commands=['start', 'help'])
 def handle_docs_audio(message):
