@@ -2,8 +2,10 @@ import telebot
 
 f = open('token.txt', 'r')
 TOKEN = f.readline()
+APIKEY = f.readline()
 f.close()
 
+print(TOKEN,APIKEY)
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(content_types=['photo', ])
@@ -12,6 +14,6 @@ def say_lmao(message: telebot.types.Message):
 
 @bot.message_handler(commands=['start', 'help'])
 def handle_docs_audio(message):
-    bot.send_message(message.chat.id,f'Hello {message.chat.username}! How are you?')
+    bot.send_message(message.chat.id,f'Псс, {message.chat.username}. Как насчет курса валюты?')
 
 bot.polling(none_stop=True)
