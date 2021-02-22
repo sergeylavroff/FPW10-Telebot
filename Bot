@@ -1,11 +1,10 @@
 import telebot
 
 f = open('token.txt', 'r')
-TOKEN = f.readline()
-APIKEY = f.readline()
+TOKEN = f.readline().strip()
+APIKEY = f.readline().strip()
 f.close()
 
-print(TOKEN,APIKEY)
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(content_types=['photo', ])
